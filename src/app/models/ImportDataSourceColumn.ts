@@ -1,17 +1,17 @@
 export class ImportDataSourceColumn
 {
 
-    //   ImportDataSourceColumnsId:number =0
+      ImportDataSourceColumnsId:number =0
 
-    //   ImportDataSourceId :number =0
+      ImportDataSourceId :number =2
 
-    //  OrderId :number =0
+      OrderId :number =0
 
-    //   ColumnName:string = null!;
+      ColumnName:string = ''
 
-    //  FormatColumnId { get; set; }
+     FormatColumnId:number|null=1
 
-    //  string? ColumnNameHebDescription { get; set; }
+     ColumnNameHebDescription:string|null=null
 
 }
-}
+
