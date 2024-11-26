@@ -1,0 +1,7 @@
+<div class="import-data">
+    <button (click)="processTables()" [disabled]="isProcessing">
+      {{ isProcessing ? 'Processing...' : 'Start Processing' }}
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  
