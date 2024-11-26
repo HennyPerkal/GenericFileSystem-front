@@ -38,6 +38,7 @@ export class ImportDataSourceComponent implements OnInit {
       urlFileAfterProcess: ['', Validators.required],
       email: ['', Validators.email],
       dataSourceTypeId: [null, Validators.required],
+      tableName: ['', Validators.required],
     });
   }
 
