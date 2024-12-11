@@ -1,26 +1,25 @@
 <div>
-    <label for="columnsCount">כמה עמודות תרצה בטבלה?</label>
-    <input type="number" id="columnsCount" [(ngModel)]="columnsCount" (ngModelChange)="updateTable()" min="1" />
-  </div>
-  
-  <table *ngIf="columnsEn.length > 0">
-    <thead>
-      <tr>
-        <th *ngFor="let column of columnsEn; let i = index">
-          <input type="text" [(ngModel)]="columnsEn[i]" placeholder=" שם העמודה באנגלית" />
-          
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-        <th *ngFor="let column of columnsHeb; let i = index">
-            <input type="text" [(ngModel)]="columnsHeb[i]" placeholder=" שם העמודה בעברית" />
-            
-          </th>
-    </tbody>
-  </table>
+  <label for="columnsCount">כמה עמודות תרצה בטבלה?</label>
+  <input type="number" id="columnsCount" [(ngModel)]="columnsCount" (ngModelChange)="updateTable()" min="1" />
+</div>
 
-  <div>
-    <button type="submit"  (click)="onSubmit()" >Submit</button>
-  </div>
-  
+<table *ngIf="columns.length > 0">
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns; let i = index">
+        <input type="text" [(ngModel)]="column.en" placeholder="שם העמודה באנגלית" />
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td *ngFor="let column of columns; let i = index">
+        <input type="text" [(ngModel)]="column.heb" placeholder="שם העמודה בעברית" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <button type="submit" (click)="onSubmit()">Submit</button>
+</div>

@@ -13,45 +13,61 @@ import { ImportDataColumnService } from '../../services/import-data-column.servi
 })
 export class ImportDataColumnComponent {
 
-
-  constructor(private MyImportDataColumnService: ImportDataColumnService) {
-
-  }
-
-  ArrNews: ImportDataSourceColumn[] = []
+  constructor(private MyImportDataColumnService: ImportDataColumnService) {}
+  orderNum:number=1;
+  ArrNews: ImportDataSourceColumn[] = [];
   columnsCount: number = 0; // מספר העמודות שהמשתמש בחר
-  columnsEn: string[] = []; // רשימה של שמות העמודות
-  columnsHeb: string[] = [];
+  columns: { en: string, heb: string }[] = []; // רשימה של אובייקטים שמכילים את הערכים של העמודות באנגלית ובעברית
+
   // פונקציה שמעדכנת את מספר העמודות בטבלה
   updateTable() {
-    this.columnsEn = new Array(this.columnsCount).fill(''); // יוצרת מערך של כמות העמודות שהמשתמש ביקש
-    this.columnsHeb = new Array(this.columnsCount).fill(''); // יוצרת מערך של כמות העמודות שהמשתמש ביקש
-
+    // יצירת מערך של אובייקטים חדשים לכל עמודה
+    this.columns = Array(this.columnsCount).fill(null).map(() => ({ en: '', heb: '' }));
   }
+  
+
   onSubmit(): void {
-
-    debugger
-    console.log('Submitted data:');
-    for (const key in this.columnsEn) {
-      var a = new ImportDataSourceColumn();
-      a.ColumnName = this.columnsEn[key]
-      a.ColumnNameHebDescription = this.columnsHeb[key]
-      a.ImportDataSourceId = 2
-      this.ArrNews.push(a)
+    console.log('Submitted data:', this.columns);  // נוודא שהנתונים מתקבלים נכון
+    
+    // אם המערך ריק, אין צורך לשלוח אותו לשרת
+    if (this.columns.length === 0) {
+      console.log("No columns to submit");
+      return;
     }
-this.createTbl(this.ArrNews)
+  
+    const ArrNews: ImportDataSourceColumn[] = [];
+  
+    // נוודא שכל עמודה שיש לה ערכים באנגלית ובעברית תיכנס
+    this.columns.forEach(column => {
+      if (column.en && column.heb) {
+        const a = new ImportDataSourceColumn();
+        a.ColumnName = column.en;
+        a.ColumnNameHebDescription = column.heb;
+        a.OrderId=this.orderNum++
+        a.ImportDataSourceId = 2;
+        ArrNews.push(a);
+      }
+    });
+  
+    if (ArrNews.length > 0) {
+      console.log("Data ready for submission:", ArrNews);
+      this.createTbl(ArrNews);
+    } else {
+      console.log("No valid data to submit.");
+    }
   }
+  
   createTbl(arr: ImportDataSourceColumn[]) {
     for (let index = 0; index < arr.length; index++) {
       this.MyImportDataColumnService.addColumn(arr[index])
         .subscribe(
           (response) => {
-            console.log("gft6u78io9ihjgf")
+            console.log("Column added successfully");
+          },
+          (error) => {
+            console.error("Error adding column:", error);
           }
-
-        )
+        );
     }
   }
 }
-
-

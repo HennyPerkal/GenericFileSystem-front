@@ -1,0 +1,49 @@
+<div class="import-data-source-form">
+    <mat-card>
+      <mat-card-title>Add New Import Data Source</mat-card-title>
+      <form [formGroup]="importDataSourceForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Import Data Source ID</mat-label>
+          <input matInput formControlName="importDataSourceId" type="number" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="importDataSourceDesc" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>System Type ID</mat-label>
+          <input matInput formControlName="systemTypeId" type="number" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Job Name</mat-label>
+          <input matInput formControlName="jobName" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>File URL</mat-label>
+          <input matInput formControlName="urlFile" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Processed File URL</mat-label>
+          <input matInput formControlName="urlFileAfterProcess" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Data Source Type ID</mat-label>
+          <input matInput formControlName="dataSourceTypeId" type="number" required />
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </form>
+    </mat-card>
+  </div>
+  
